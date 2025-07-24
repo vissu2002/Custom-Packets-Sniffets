@@ -7,6 +7,8 @@ def capture_packets(packet_count=10):
         writer = csv.writer(file)
         writer.writerow(["Time", "Source", "Destination", "Protocol", "Length"])
 
+
+
         def process(packet):
             writer.writerow([
                 packet.time,
