@@ -1,22 +1,28 @@
 import pandas as pd
 
-def analyze_packets():
-    try:
-        df = pd.read_csv("packet.csv")
+# Load the CSV file
+df = pd.read_csv("packets.csv")
 
-        top_src_ips = df['Source'].value_counts().head(5).to_dict()
-        top_dst_ips = df['Destination'].value_counts().head(5).to_dict()
-        top_protocols = df['Protocol'].value_counts().head(5).to_dict()
+# 1. Total packets
+total_packets = len(df)
 
-        return {
-            "top_source_ips": top_src_ips,
-            "top_destination_ips": top_dst_ips,
-            "top_protocols": top_protocols
-        }
+# 2. Protocol-wise packet count
+protocol_counts = df['Protocol'].value_counts()
 
-    except FileNotFoundError:
-        return {"error": "packet.csv not found."}
-    except Exception as e:
-        return {"error": str(e)}
+# 3. Top 5 Source IPs
+top_src_ips = df['Source'].value_counts().head(5)
 
+# 4. Top 5 Destination IPs
+top_dst_ips = df['Destination'].value_counts().head(5)
 
+# 5. Total bytes
+total_bytes = df['Length'].sum()
+
+# Display the results
+print("========== Packet Analysis ==========")
+print(f"📦 Total Packets Captured: {total_packets}")
+print("\n📊 Protocol-wise Packet Count:\n", protocol_counts)
+print("\n🔝 Top 5 Source IPs:\n", top_src_ips)
+print("\n🔝 Top 5 Destination IPs:\n", top_dst_ips)
+print(f"\n💾 Total Bytes Captured: {total_bytes} bytes")
+print("======================================")
