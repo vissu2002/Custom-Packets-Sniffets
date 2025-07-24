@@ -54,6 +54,7 @@ def start_sniff():
             proto_count[proto] = proto_count.get(proto, 0) + 1
 
 
+
         bar = go.Bar(x=list(proto_count.keys()), y=list(proto_count.values()))
         layout = go.Layout(title="Protocol Distribution", xaxis=dict(title="Protocol"), yaxis=dict(title="Count"))
         graphJSON = json.dumps({"data": [bar], "layout": layout}, default=str)
